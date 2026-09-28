@@ -12,7 +12,7 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: 'Felhasználónév és jelszó kötelező' });
   }
 
-  const sql = neon(process.env.DATABASE_URL);
+  const sql = neon(process.env.POSTGRES_URL || process.env.DATABASE_URL);
   const rows = await sql`
     SELECT id, username, password_hash, role
     FROM users
